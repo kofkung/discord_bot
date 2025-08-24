@@ -4,7 +4,7 @@ from discord.ui import Button, View, Modal, TextInput
 from dotenv import load_dotenv
 import os
 
-load_dotenv("ticket.env")
+load_dotenv(".venv/ticket.env")
 TOKEN = os.getenv("DISCORD_TOKEN")
 
 intents = discord.Intents.default()

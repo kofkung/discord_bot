@@ -4,7 +4,7 @@ from discord.ext import commands
 from dotenv import load_dotenv
 import os
 # ใส่ Token ของคุณตรงนี้เลย
-load_dotenv("well.env")
+load_dotenv(".venv/well.env")
 TOKEN = os.getenv("DISCORD_TOKEN")
 
 # ตั้งค่า intents

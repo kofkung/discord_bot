@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 import random
 import os
 
-load_dotenv("rank.env")
+load_dotenv(".venv/rank.env")
 TOKEN = os.getenv("DISCORD_TOKEN")
 
 intents = discord.Intents.default()
