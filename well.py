@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 import os
 # ใส่ Token ของคุณตรงนี้เลย
 load_dotenv(".venv/well.env")
-TOKEN = os.getenv("DISCORD_TOKEN")
+TOKEN = os.getenv("DISCORD_TOKEN3")
 
 # ตั้งค่า intents
 intents = discord.Intents.default()
@@ -50,4 +50,4 @@ async def on_member_join(member):
 
     await channel.send(embed=embed)
 
-bot.run(os.getenv("DISCORD_TOKEN"))
+bot.run(os.getenv("DISCORD_TOKEN3"))
