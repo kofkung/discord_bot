@@ -38,10 +38,14 @@ class TicketModal(Modal):
         self.gender = TextInput(label="เพศ", placeholder="ชาย / หญิง")
         self.reference = TextInput(label="Reference", placeholder="อธิบายเพิ่มเติมลักษณะต่างๆของสกิน")
         self.image_url = TextInput(label="แนบรูปภาพ (URL)", placeholder="วางลิงก์ไฟล์ JPG/PNG ถ้ามี", required=False)
+        self.addon = TextInput(label="เอาแอดออนไหม?", placeholder="พิมพ์ ใช่ / ไม่ *หากไม่ใส่ข้อมูลจะนับว่า ไม่*", required=False)  # เพิ่มช่อง addon
+
+        # เพิ่มทุกช่องใน Modal
         self.add_item(self.skin)
         self.add_item(self.gender)
         self.add_item(self.reference)
         self.add_item(self.image_url)
+        self.add_item(self.addon)
 
     async def on_submit(self, interaction: discord.Interaction):
         guild = interaction.guild
@@ -70,7 +74,8 @@ class TicketModal(Modal):
                 f"**สกิน:** {self.skin.value}\n"
                 f"**เพศ:** {self.gender.value}\n"
                 f"**Reference:** {self.reference.value}\n"
-                f"**รูปภาพ:** {self.image_url.value if self.image_url.value else 'ไม่มี'}"
+                f"**รูปภาพ:** {self.image_url.value if self.image_url.value else 'ไม่มี'}\n"
+                f"**เอาแอดออนไหม:** {self.addon.value if self.addon.value else 'ไม่ได้เลือก'}"
             ),
             color=discord.Color.blue()
         )
@@ -93,7 +98,8 @@ class TicketModal(Modal):
                 f"**สกิน:** {self.skin.value}\n"
                 f"**เพศ:** {self.gender.value}\n"
                 f"**Reference:** {self.reference.value}\n"
-                f"**รูปภาพ:** {self.image_url.value if self.image_url.value else 'ไม่มี'}"
+                f"**รูปภาพ:** {self.image_url.value if self.image_url.value else 'ไม่มี'}\n"
+                f"**เอาแอดออนไหม:** {self.addon.value if self.addon.value else 'ไม่ได้เลือก'}"
             ),
             color=discord.Color.green()
         )
