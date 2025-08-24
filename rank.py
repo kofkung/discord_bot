@@ -14,7 +14,7 @@ intents.members = True
 bot = commands.Bot(command_prefix="!", intents=intents)
 
 ROLE_NAME = "Customer"
-CHANNEL_NAME = "get-rank"
+CHANNEL_NAME = "｡･⊹🔮-𝗴𝗲𝘁-𝗿𝗮𝗻𝗸"
 
 # รูปภาพปกติ
 IMAGE_LIST = [
