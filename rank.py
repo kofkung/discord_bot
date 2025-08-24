@@ -26,7 +26,7 @@ intents = discord.Intents.default()
 intents.members = True
 bot = commands.Bot(command_prefix="!", intents=intents)
 
-ROLE_NAME = "𖦹 𐙚 Customer ♡ 彡"
+ROLE_NAME = "𖦹 𐙚  Customer  ♡ 彡"
 CHANNEL_NAME = "｡･⊹🔮-𝗴𝗲𝘁-𝗿𝗮𝗻𝗸"
 
 IMAGE_LIST = [
