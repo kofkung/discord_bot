@@ -7,7 +7,7 @@ import random
 import os
 
 load_dotenv(".venv/rank.env")
-TOKEN = os.getenv("DISCORD_TOKEN")
+TOKEN = os.getenv("DISCORD_TOKEN1")
 
 intents = discord.Intents.default()
 intents.members = True
@@ -84,4 +84,4 @@ async def send_rank_button(member, channel, role):
     # ส่งข้อความแบบ ephemeral ให้เฉพาะสมาชิกใหม่
     await member.send(embed=embed, view=view)
 
-bot.run(os.getenv("DISCORD_TOKEN"))
+bot.run(os.getenv("DISCORD_TOKEN1"))

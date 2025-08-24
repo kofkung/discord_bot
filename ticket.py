@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 import os
 
 load_dotenv(".venv/ticket.env")
-TOKEN = os.getenv("DISCORD_TOKEN")
+TOKEN = os.getenv("DISCORD_TOKEN2")
 
 intents = discord.Intents.default()
 intents.members = True
@@ -182,4 +182,4 @@ async def on_interaction(interaction: discord.Interaction):
             modal = TicketModal(interaction.user)
             await interaction.response.send_modal(modal)
 
-bot.run(os.getenv("DISCORD_TOKEN"))
+bot.run(os.getenv("DISCORD_TOKEN2"))
