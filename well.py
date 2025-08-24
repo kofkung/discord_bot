@@ -3,7 +3,24 @@ import discord
 from discord.ext import commands
 from dotenv import load_dotenv
 import os
-# ใส่ Token ของคุณตรงนี้เลย
+import threading
+from flask import Flask
+
+# ---------- Flask Server สำหรับเปิด port ----------
+app = Flask(__name__)
+
+@app.route("/")
+def home():
+    return "Bot is running!"
+
+def run_flask():
+    port = int(os.environ.get("PORT", 5000))  # ใช้ PORT จาก environment หรือ 5000 เป็นค่า default
+    app.run(host="0.0.0.0", port=port)
+
+# เรียก Flask server ใน thread แยก
+threading.Thread(target=run_flask).start()
+
+# ---------- โหลด Token ----------
 load_dotenv(".venv/well.env")
 TOKEN = os.getenv("DISCORD_TOKEN3")
 
@@ -12,10 +29,6 @@ intents = discord.Intents.default()
 intents.members = True  # ต้องเปิด Server Members Intent
 
 bot = commands.Bot(command_prefix="!", intents=intents)
-
-@bot.event
-async def on_ready():
-    print(f"✅ บอทล็อกอินแล้ว: {bot.user}")
 
 WELCOME_MESSAGES = [
     "🎉 ยินดีต้อนรับ {member} สู่ Ayxora Shop!",
@@ -26,6 +39,10 @@ WELCOME_MESSAGES = [
 WELCOME_GIFS = [
     "https://cdn.discordapp.com/attachments/1401765668491100163/1408730547865256037/file_000000002324622f979534ea5f1642e2.png?ex=68aace0f&is=68a97c8f&hm=77fe9a219c270406fb3419c4a39656e3a75408a378710d3f2e9126398f830c66"
 ]
+
+@bot.event
+async def on_ready():
+    print(f"✅ บอทล็อกอินแล้ว: {bot.user}")
 
 @bot.event
 async def on_member_join(member):
@@ -50,4 +67,5 @@ async def on_member_join(member):
 
     await channel.send(embed=embed)
 
+# ---------- รัน Bot ----------
 bot.run(os.getenv("DISCORD_TOKEN3"))

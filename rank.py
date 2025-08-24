@@ -5,7 +5,24 @@ from discord.ui import Button, View
 from dotenv import load_dotenv
 import random
 import os
+import threading
+from flask import Flask
 
+# ---------- Flask Server สำหรับเปิด port ----------
+app = Flask(__name__)
+
+@app.route("/")
+def home():
+    return "Bot is running!"
+
+def run_flask():
+    port = int(os.environ.get("PORT", 5000))  # ใช้ PORT จาก environment หรือ 5000 เป็นค่า default
+    app.run(host="0.0.0.0", port=port)
+
+# เรียก Flask server ใน thread แยก
+threading.Thread(target=run_flask).start()
+
+# ---------- โหลด Token ----------
 load_dotenv(".venv/rank.env")
 TOKEN = os.getenv("DISCORD_TOKEN1")
 
@@ -48,9 +65,6 @@ async def send_rank_button(member, channel, role):
 
         try:
             await member.add_roles(role)
-            # ลบข้อความเดิมที่มีปุ่ม (ephemeral จะหายไปเอง)
-
-            # ส่ง Embed ใหม่ให้ทุกคนเห็น
             embed = discord.Embed(
                 title="🎉 สมาชิกได้รับยศแล้ว!",
                 description=f"{member.mention} ได้รับยศ `{role.name}`",
@@ -59,8 +73,6 @@ async def send_rank_button(member, channel, role):
             if member.avatar:
                 embed.set_thumbnail(url=member.avatar.url)
             await channel.send(embed=embed)
-
-            # ตอบสมาชิกใหม่แบบ ephemeral
             await interaction.response.send_message("คุณได้รับยศแล้ว!", ephemeral=True)
 
         except discord.Forbidden:
@@ -81,7 +93,7 @@ async def send_rank_button(member, channel, role):
         embed.set_thumbnail(url=member.avatar.url)
     embed.set_image(url=image_url)
 
-    # ส่งข้อความแบบ ephemeral ให้เฉพาะสมาชิกใหม่
     await member.send(embed=embed, view=view)
 
+# ---------- รัน Bot ----------
 bot.run(os.getenv("DISCORD_TOKEN1"))
